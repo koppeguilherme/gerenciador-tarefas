@@ -11,6 +11,11 @@ class UserController {
             throw new Error('Nome, email e senha são obrigatórios.')
         }
 
+        const validaEmail = await user.findOne({ where: { email } })
+        if (validaEmail) {
+            throw new Error('este email já existe.')
+        }
+
         const cypherSenha = await bcrypt.hash(senha, SALT_VALUE)
 
         const userValue = await user.create({

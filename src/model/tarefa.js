@@ -10,7 +10,13 @@ class Tarefa {
                 autoIncrement: true
             },
             titulo: {
-                type: database.db.Sequelize.STRING
+                type: database.db.Sequelize.STRING,
+                validate: {
+                    len: {
+                        args: [10, 100],
+                        msg: "O titulo deve ter entre 10 e 100 caracteres"
+                    }
+                }
             },
             descricao: {
                 type: database.db.Sequelize.STRING
